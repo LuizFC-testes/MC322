@@ -42,4 +42,9 @@ public class Tabuleiro {
         }
         System.out.println("  a b c d e f g");
     }
+
+    int extrairCoordenada (String coord) {
+        // coord contém uma letra seguida de um número
+        return (coord.charAt(1) - '1') * 8 + (coord.charAt(0) - 'a');
+    }
 }
