@@ -8,6 +8,6 @@ public class AppRestaUm {
     public static void main (String []args) {
         Tabuleiro tab = new Tabuleiro();
         tab.imprimirTabuleiro();
-        System.out.println(tab.extrairCoordenada("b3"));
+        System.out.println(tab.extrairCoordenada("d5"));
     }
 }

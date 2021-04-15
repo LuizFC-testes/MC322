@@ -45,6 +45,6 @@ public class Tabuleiro {
 
     int extrairCoordenada (String coord) {
         // coord contém uma letra seguida de um número
-        return (coord.charAt(1) - '1') * 8 + (coord.charAt(0) - 'a');
+        return ('7' - coord.charAt(1)) * 8 + (coord.charAt(0) - 'a');
     }
 }
