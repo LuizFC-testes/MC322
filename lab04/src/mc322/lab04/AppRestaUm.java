@@ -3,11 +3,11 @@ public class AppRestaUm {
         CSVReader csv = new CSVReader();
 	    csv.setDataSource(caminho);
         String commands[] = csv.requestCommands();
+        Tabuleiro tab = new Tabuleiro();
+        tab.jogar(commands);
     }
 
     public static void main (String []args) {
-        Tabuleiro tab = new Tabuleiro();
-        tab.imprimirTabuleiro();
-        System.out.println(tab.extrairCoordenada("d5"));
+        executaJogo("teste.csv");
     }
 }
