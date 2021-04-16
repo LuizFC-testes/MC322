@@ -84,7 +84,49 @@ public class Tabuleiro {
         System.out.println("  a b c d e f g");
     }
 
+    int extrairCoordenada (String coord) {
+        // coord contém uma letra seguida de um número
+        return ('7' - coord.charAt(1)) * 7 + (coord.charAt(0) - 'a');
+    }
+
+    boolean casaExiste(String casa) {
+        char letra = casa.charAt(0),
+             numero = casa.charAt(1);
+        if (letra - 'a' >= 0 && letra - 'a' < 7) {
+            if (numero - '1' >= 0 && numero - '1' < 7) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean passoEhValido (String movimento) {
+        String source = movimento.substring(0, 2),
+               target = movimento.substring(3);
+        int ini = extrairCoordenada(source),
+            fim = extrairCoordenada(target),
+            distancia = Math.abs(fim - ini);
+        if (casaExiste(source) && casaExiste(target)) {
+            if (distancia == 16 || distancia == 2) {
+                if (setup[fim] == null && setup[(fim + ini)/2].tipoC == TipoCasa.PECA && setup[ini].tipoC == TipoCasa.PECA) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    void comerPeca(String iniCoord, String fimCoord) {
+        int ini = extrairCoordenada(iniCoord),
+            fim = extrairCoordenada(fimCoord);
+        setup[ini].atribuirCoord(fimCoord.charAt(1), fimCoord.charAt(0));
+        setup[fim] = setup[ini];
+        setup[ini] = null;
+        setup[(ini + fim)/2] = null;
+    }
+
     void imprimirPosicoes() {
+        // Teste
         int pos = 0;
         Peca casa;
         String coord;

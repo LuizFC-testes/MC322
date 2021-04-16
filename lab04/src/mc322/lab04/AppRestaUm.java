@@ -14,5 +14,8 @@ public class AppRestaUm {
         Tabuleiro tab = new Tabuleiro();
         tab.imprimirTabuleiro();
         tab.imprimirPosicoes();
+        tab.comerPeca("d6", "d4");
+        tab.imprimirTabuleiro();
+        tab.imprimirPosicoes();
     }
 }
