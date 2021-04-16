@@ -57,7 +57,7 @@ public class Tabuleiro {
             /*System.out.print("ini: " + movimento.substring(0,2) + " ");
             System.out.print("fim: " + movimento.substring(3) + " ");
             System.out.print("Inicio: " + ini + " Fim: " + fim + " ");*/
-        if (ini < 64 && fim < 64 && ini >= 0 && fim >= 0) {
+        if (ini < 64 && fim < 64 && ini >= 0 && fim >= 0 && ini%8 != 7 && fim%8 != 7) {
             //System.out.print(" 1 ");
             if (distancia == 16 || distancia == 2) {
                 //System.out.print(" 2 ");
