@@ -107,7 +107,7 @@ public class Tabuleiro {
             fim = extrairCoordenada(target),
             distancia = Math.abs(fim - ini);
         if (casaExiste(source) && casaExiste(target)) {
-            if (distancia == 16 || distancia == 2) {
+            if (distancia == 14 || distancia == 2) {
                 if (setup[fim] == null && setup[(fim + ini)/2].tipoC == TipoCasa.PECA && setup[ini].tipoC == TipoCasa.PECA) {
                     return true;
                 }
@@ -123,6 +123,27 @@ public class Tabuleiro {
         setup[fim] = setup[ini];
         setup[ini] = null;
         setup[(ini + fim)/2] = null;
+    }
+
+    String converterSetupParaString() {
+        String setStr = "";
+        char novoC;
+        int pos = 0;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (setup[pos] == null) {
+                    novoC = '-';
+                } else if (setup[pos].tipoC == TipoCasa.BRANCO) {
+                    novoC = ' ';
+                } else {
+                    novoC = 'P';
+                }
+                pos += 1;
+                setStr = setStr + novoC;
+            }
+            setStr = setStr + '\n';
+        }
+        return setStr;
     }
 
     void imprimirPosicoes() {
@@ -144,5 +165,29 @@ public class Tabuleiro {
             }
             System.out.print("\n");
         }
+    }
+
+    public ArrayList<String> jogar(String[] movimentos) {
+        System.out.println("Tabuleiro inicial:");
+        imprimirTabuleiro();
+        int qtdJogadas = movimentos.length;
+        ArrayList<String> instancias = new ArrayList<String>();
+        String instAtual, iniCoord, fimCoord;
+        instAtual = converterSetupParaString();
+        instancias.add(instAtual);
+        for (int i = 0; i < qtdJogadas; i++) {
+            iniCoord = movimentos[i].substring(0,2);
+            fimCoord = movimentos[i].substring(3);
+            System.out.println("\nSource: " + iniCoord);
+            System.out.println("Target: " + fimCoord);
+            if (passoEhValido(movimentos[i])) {
+                comerPeca(iniCoord, fimCoord);
+            }
+            imprimirTabuleiro();
+            instAtual = converterSetupParaString();
+            instancias.add(instAtual);
+        }
+        imprimirPosicoes();
+        return instancias;
     }
 }
