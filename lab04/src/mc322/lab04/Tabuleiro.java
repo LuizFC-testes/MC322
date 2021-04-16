@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.ArrayList;
 
 public class Tabuleiro {
     char[] setup;
@@ -94,10 +95,12 @@ public class Tabuleiro {
         inverterConfig(fim);
     }
 
-    void jogar(String[] movimentos) {
+    public ArrayList jogar(String[] movimentos) {
         System.out.println("Tabuleiro inicial:");
         imprimirTabuleiro();
         int qtdJogadas = movimentos.length, ini, fim;
+        ArrayList<String> instancias = new ArrayList<String>();
+        String instAtual;
         for (int i = 0; i < qtdJogadas; i++) {
             System.out.println("\nSource: " + movimentos[i].substring(0,2));
             System.out.println("Target: " + movimentos[i].substring(3));
@@ -107,6 +110,9 @@ public class Tabuleiro {
                 comerPeca(ini, fim);
             }
             imprimirTabuleiro();
+            instAtual = String.valueOf(setup);
+            instancias.add(instAtual);
         }
+        return instancias;
     }
 }
