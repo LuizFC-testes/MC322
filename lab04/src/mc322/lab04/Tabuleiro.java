@@ -49,21 +49,30 @@ public class Tabuleiro {
         // coord contém uma letra seguida de um número
         return ('7' - coord.charAt(1)) * 8 + (coord.charAt(0) - 'a');
     }
+
+    boolean casaExiste(String casa) {
+        char letra = casa.charAt(0),
+             numero = casa.charAt(1);
+        if (letra - 'a' >= 0 && letra - 'a' < 7) {
+            if (numero - '1' >= 0 && numero - '1' < 7) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     boolean passoEhValido (String movimento) {
-        int ini = extrairCoordenada(movimento.substring(0, 2)),
-            fim = extrairCoordenada(movimento.substring(3)),
+        String source = movimento.substring(0, 2),
+               target = movimento.substring(3);
+        int ini = extrairCoordenada(source),
+            fim = extrairCoordenada(target),
             distancia = Math.abs(fim - ini);
-            /*System.out.print("ini: " + movimento.substring(0,2) + " ");
-            System.out.print("fim: " + movimento.substring(3) + " ");
-            System.out.print("Inicio: " + ini + " Fim: " + fim + " ");*/
-        if (ini < 64 && fim < 64 && ini >= 0 && fim >= 0 && ini%8 != 7 && fim%8 != 7) {
-            //System.out.print(" 1 ");
-            if (distancia == 16 || distancia == 2) {
-                //System.out.print(" 2 ");
-                if (setup[fim] == '-' && setup[(fim + ini)/2] == 'P' && setup[ini] == 'P') {
-                    //System.out.print(" 3 ");
-                    return true;
+        if (casaExiste(source) && casaExiste(target)) {
+            if (ini < 64 && fim < 64 && ini >= 0 && fim >= 0 && ini%8 != 7 && fim%8 != 7) {
+                if (distancia == 16 || distancia == 2) {
+                    if (setup[fim] == '-' && setup[(fim + ini)/2] == 'P' && setup[ini] == 'P') {
+                        return true;
+                    }
                 }
             }
         }
