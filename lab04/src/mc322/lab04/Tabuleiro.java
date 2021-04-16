@@ -146,27 +146,6 @@ public class Tabuleiro {
         return setStr;
     }
 
-    void imprimirPosicoes() {
-        // Teste
-        int pos = 0;
-        Peca casa;
-        String coord;
-        for (int i = 0; i < 7; i++) {
-            for (int j = 0; j < 7; j++) {
-                casa = setup[pos];
-                if (casa == null) {
-                    System.out.print("--");
-                } else {
-                    coord = "" + casa.coluna + casa.linha;
-                    System.out.print(coord);
-                }
-                System.out.print(" ");
-                pos += 1;
-            }
-            System.out.print("\n");
-        }
-    }
-
     public ArrayList<String> jogar(String[] movimentos) {
         System.out.println("Tabuleiro inicial:");
         imprimirTabuleiro();
@@ -187,7 +166,6 @@ public class Tabuleiro {
             instAtual = converterSetupParaString();
             instancias.add(instAtual);
         }
-        imprimirPosicoes();
         return instancias;
     }
 }
